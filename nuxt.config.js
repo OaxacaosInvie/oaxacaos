@@ -1,4 +1,5 @@
 const colors = require('vuetify/es5/util/colors').default
+const webpack = require('webpack')
 
 module.exports = {
   mode: 'universal',
@@ -73,11 +74,14 @@ module.exports = {
     ** You can extend webpack config here
     */
     extend (config, ctx) {
+      new webpack.ProvidePlugin({
+        mapboxgl: 'mapbox-gl'
+      })
     }
   },
 
   server: {
     port: 1234,
-    host: '192.168.1.71'
+    host: '192.168.1.71' //25.1.55.134 - casa | 192.168.1.71 - infinitumInviertete
   }
 }

@@ -7,48 +7,66 @@
           <v-col
           cols="12"
           xl="2"
-          lg="3"
+          lg="2"
           md="1"
           sm="1"
-          xs="1"></v-col>
+          xs="12"></v-col>
           <v-col
           cols="12"
           xl="8"
-          lg="6"
+          lg="8"
           md="10"
           sm="10"
-          xs="10">
+          xs="12">
             <div class="hidden-xs-only">
-              <v-card flat>
+              <v-card id="card" flat>
                 <div>
-                  <h1 class="py-6">Inicia sesión</h1>
-                  <div class="pa-6">
-                    <div class="px-12 mx-12 pb-12">
-                      <v-text-field label="Email" type="email" color="rgb(249,87,56)" req></v-text-field>
-                      <v-text-field label="Contraseña" type="password" color="rgb(249,87,56)"></v-text-field>
-                    </div>
-                    <div class="pb-12">
-                      <v-btn class="px-12 mx-12" id="h" large elevation="0">Crea tu cuenta aquí</v-btn>
-                    </div>
-                  </div>
-                </div>
-              </v-card>
-            </div>
-            <div class="hidden-sm-and-up px-2">
-              <v-card flat>
-                <div>
-                  <h1 class="py-6">Inicia sesión</h1>
-                  <div class="pa-6">
-                    <div class="px-6 pb-6">
-                      <v-text-field label="Email" type="email" color="rgb(249,87,56)" req></v-text-field>
-                      <v-text-field label="Contraseña" type="password" color="rgb(249,87,56)"></v-text-field>
-                    </div>
-                    <div class="pb-12">
-                      <v-hover>
-                        <v-btn text>hola</v-btn>
-                      </v-hover>
-                    </div>
-                  </div>
+                  <v-row align="center" justify="center">
+                    <v-col
+                    cols="12"
+                    xl="6"
+                    lg="6"
+                    md="6">
+                      <v-container>
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. In hic incidunt sint, doloremque sed porro aliquam, nihil id quis commodi neque alias, assumenda fuga ex! Voluptate quaerat ducimus quasi iste!
+                      </v-container>
+                    </v-col>
+                    <v-col
+                    cols="12"
+                    xl="6"
+                    lg="6"
+                    md="6">
+                      <v-form ref="form" v-model="valid">
+                        <v-container>
+                          <v-row>
+                            <v-col>
+                                <div class="py-12 px-6 mr-3" align="center" justify="center">
+                                  <v-text-field
+                                    v-model="email"
+                                    :rules="emailRules"
+                                    label="Correo electrónico"
+                                    required
+                                    dark
+                                    type="email"
+                                    color="white"
+                                  ></v-text-field>
+                                  <v-text-field
+                                    v-model="password"
+                                    :rules="passwordRules"
+                                    label="Contraseña"
+                                    type="password"
+                                    required
+                                    dark
+                                    color="white"
+                                  ></v-text-field>
+                                  <v-btn large>hola</v-btn>
+                                </div>
+                            </v-col>
+                          </v-row>
+                        </v-container>
+                      </v-form>
+                    </v-col>
+                  </v-row>
                 </div>
               </v-card>
             </div>
@@ -56,10 +74,10 @@
           <v-col
           cols="12"
           xl="2"
-          lg="3"
+          lg="2"
           md="1"
           sm="1"
-          xs="1"></v-col>
+          xs="12"></v-col>
         </v-row>
       </v-container>
     </div>
@@ -73,13 +91,28 @@ export default {
   layout: 'NoAppBar',
   components: {
     navLog
-  }
+  },
+  data: () => ({
+    valid: false,
+    password: '',
+    passwordRules: [
+      v => !!v || 'Necesitas escribir tu contraseña para entrar'
+    ],
+    email: '',
+    emailRules: [
+      v => !!v || 'Necesitas escribir tu correo para entrar',
+      v => /.+@.+/.test(v) || 'Dirección de correo inválida'
+    ]
+  })
 }
 </script>
 
 <style>
-  #h {
-    color: white;
-    background: linear-gradient(90deg, rgba(8,61,119,1) 0%, rgba(249,87,56,1) 100%);
+  /*background: linear-gradient(45deg, rgba(8,110,119,1) 0%, rgba(8,61,119,1) 100%);*/
+  #card {
+    background: linear-gradient(90deg, #F95738 50%, #083D77 50%);
+  }
+  v-text-field {
+    color: red;
   }
 </style>

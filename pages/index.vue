@@ -10,7 +10,9 @@
               <div class="py-12">
                 <v-row align="start" justify="start">
                   <v-col cols="12" lg="6" md="6" sm="6" xs="12">
-                    <v-btn id="button" x-large color="white" elevation="12">Crea tu cuenta aquí</v-btn>
+                    <nuxt-link to="/select" id="no-decoration">
+                      <v-btn block id="button" x-large color="white" elevation="12">Crea tu cuenta aquí</v-btn>
+                    </nuxt-link>
                   </v-col>
                   <v-col cols="12" lg="6" md="6" sm="6" xs="12">
                     <nuxt-link to="/login" id="no-decoration">
@@ -39,7 +41,9 @@
               <div class="pt-12 px-6" align="center" justify="center">
                 <v-row align="center" justify="center">
                   <v-col cols="12" md="6" sm="6" xs="12">
-                    <v-btn id="button" block x-large color="white" elevation="12">Crea tu cuenta aquí</v-btn>
+                    <nuxt-link to="/select" id="no-decoration">
+                      <v-btn block id="button" x-large color="white" elevation="12">Crea tu cuenta aquí</v-btn>
+                    </nuxt-link>
                   </v-col>
                   <v-col cols="12" md="6" sm="6" xs="12">
                     <nuxt-link to="/login" id="no-decoration">
@@ -69,7 +73,9 @@
               <div class="pt-12 px-6" align="center" justify="center">
                 <v-row align="center" justify="center">
                   <v-col cols="12" md="6" sm="6" xs="12">
-                    <v-btn block id="button" x-large color="white" elevation="12">Crea tu cuenta aquí</v-btn>
+                    <nuxt-link to="/select" id="no-decoration">
+                      <v-btn block id="button" x-large color="white" elevation="12">Crea tu cuenta aquí</v-btn>
+                    </nuxt-link>
                   </v-col>
                   <v-col cols="12" md="6" sm="6" xs="12">
                     <nuxt-link to="/login" id="no-decoration">

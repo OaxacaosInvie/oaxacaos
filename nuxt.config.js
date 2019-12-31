@@ -7,8 +7,8 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    titleTemplate: '%s - ' + process.env.npm_package_name,
-    title: process.env.npm_package_name || '',
+    //titleTemplate: '%s - ' + 'process.env.npm_package_name', //titleTemplate: '%s - ' + 'Oaxacaos'
+    title: 'Oaxacaos' || '', //process.env.npm_package_name
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -31,6 +31,9 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    {
+      src: '~/plugins/vue-tel-input.js', mode: 'server'
+    }
   ],
   /*
   ** Nuxt.js dev-modules

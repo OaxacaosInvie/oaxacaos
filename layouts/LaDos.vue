@@ -4,7 +4,6 @@
       <v-app-bar
         color="white"
         flat
-        fixed
         align="center"
         justify="center"
       >

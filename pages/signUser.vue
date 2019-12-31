@@ -1,6 +1,6 @@
 <template>
-  <div class="py-12" align="center" justify="center">
-    <div class="py-12">
+  <div align="center" justify="center">
+    <div>
       <v-container>
         <v-row align="center" justify="center">
           <v-col
@@ -10,7 +10,7 @@
             md="8"
             sm="8"
             xs="12">
-            <div class="py-12">
+            <div class="py-6">
               <div class="reddd py-6">
                 <h1 id="redGra" class="display-1 font-weight-bold">Regístrate</h1>
                 <p class="title font-weight-light">Crea tu cuenta y mantente al tanto de lo que ocurre en las calles de Oaxaca.</p>
@@ -34,7 +34,6 @@
                       type="text"
                       color="#F95738"
                     ></v-text-field>
-                    <VueTelInput v-model="phone" v-bind="bindProps"></VueTelInput>
                     <v-text-field
                       v-model="email"
                       :rules="emailRules"
@@ -54,9 +53,18 @@
                       @click:append="show1 = !show1"
                       color="#F95738"
                     ></v-text-field>
+                    <div class="py-3">
+                      <VueTelInput v-model="phone" v-bind="bindProps"></VueTelInput>
+                    </div>
+                    <div class="py-6">
+                      <v-btn dark color="#F95738" elevation="0" rounded>Ingresar</v-btn>
+                    </div>
                   </div>
                 </v-container>
               </v-form>
+              <div style="color:#F95738">
+                <p class="font-weight-light">¿Ya tienes cuenta? <nuxt-link to="/login" id="no-decoration" style="color:#F95738" class="font-weight-bold">Inicia sesión aquí</nuxt-link></p>
+              </div>
             </div>
           </v-col>
         </v-row>

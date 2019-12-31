@@ -7,6 +7,11 @@ module.exports = {
   ** Headers of the page
   */
   head: {
+    script: [
+      {
+        src: 'https://www.gstatic.com/firebasejs/[VERSION-NUMBER]/firebase-app.js'
+      }
+    ],
     //titleTemplate: '%s - ' + 'process.env.npm_package_name', //titleTemplate: '%s - ' + 'Oaxacaos'
     title: 'Oaxacaos' || '', //process.env.npm_package_name
     meta: [
@@ -32,7 +37,8 @@ module.exports = {
   */
   plugins: [
     {
-      src: '~/plugins/vue-tel-input.js', mode: 'server'
+      src: '~/plugins/vue-tel-input.js', mode: 'server',
+      src: '~/plugins/firebase.js'
     }
   ],
   /*

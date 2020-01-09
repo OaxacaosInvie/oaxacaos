@@ -2,16 +2,16 @@ const colors = require('vuetify/es5/util/colors').default
 const webpack = require('webpack')
 
 module.exports = {
+  script: [
+    {
+      src: 'https://www.gstatic.com/firebasejs/[VERSION-NUMBER]/firebase-app.js'
+    }
+  ],
   mode: 'universal',
   /*
   ** Headers of the page
   */
   head: {
-    script: [
-      {
-        src: 'https://www.gstatic.com/firebasejs/[VERSION-NUMBER]/firebase-app.js'
-      }
-    ],
     //titleTemplate: '%s - ' + 'process.env.npm_package_name', //titleTemplate: '%s - ' + 'Oaxacaos'
     title: 'Oaxacaos' || '', //process.env.npm_package_name
     meta: [
@@ -37,7 +37,6 @@ module.exports = {
   */
   plugins: [
     {
-      src: '~/plugins/vue-tel-input.js', mode: 'server',
       src: '~/plugins/firebase.js'
     }
   ],
@@ -82,11 +81,11 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
-    extend (config, ctx) {
-      new webpack.ProvidePlugin({
-        mapboxgl: 'mapbox-gl'
-      })
-    }
+    // extend (config, ctx) {
+    //   new webpack.ProvidePlugin({
+    //     mapboxgl: 'mapbox-gl'
+    //   })
+    // }
   },
 
   server: {

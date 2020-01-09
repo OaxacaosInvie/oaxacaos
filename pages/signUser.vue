@@ -53,11 +53,8 @@
                       @click:append="show1 = !show1"
                       color="#F95738"
                     ></v-text-field>
-                    <div class="py-3">
-                      <VueTelInput v-model="phone" v-bind="bindProps"></VueTelInput>
-                    </div>
                     <div class="py-6">
-                      <v-btn dark color="#F95738" elevation="0" rounded>Ingresar</v-btn>
+                      <v-btn dark color="#F95738" elevation="0" rounded v-on:click="sign">Ingresar</v-btn>
                     </div>
                   </div>
                 </v-container>
@@ -74,12 +71,9 @@
 </template>
 
 <script>
-import { VueTelInput } from 'vue-tel-input'
+import firebase from 'firebase'
 export default {
   layout: 'LaDos',
-  components: {
-    VueTelInput
-  },
   data () {
     return {
       show1: false,
@@ -102,13 +96,21 @@ export default {
       lastN: '',
       lastNRules: [
         v => !!v || 'Necesitas rellenar este campo'
-      ],
-      phone: '',
-      bindProps: {
-        mode: 'international',
-        defaultCountry: 'MX',
-        placeholder: 'Ingresa tu número de celular',
-        validCharactersOnly: true
+      ]
+    }
+  },
+  methods: {
+    sign () {
+      try {
+        firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
+        const user = firebase.auth().currentUser
+        firebase.database().ref('users/' + user.uid.toString()).set({
+          name: this.name,
+          lastName: this.lastN,
+          email: this.email
+        })
+      } catch (error) {
+        console.log(`Esto es un error: ${error}`)
       }
     }
   }

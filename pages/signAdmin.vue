@@ -61,7 +61,7 @@
                       color="#083d77"
                     ></v-text-field>
                     <div class="py-6">
-                      <v-btn dark color="#083d77" elevation="0" rounded>Ingresar</v-btn>
+                      <v-btn dark color="#083d77" elevation="0" rounded v-on:click="signAdmin">Ingresar</v-btn>
                     </div>
                   </div>
                 </v-container>
@@ -78,6 +78,7 @@
 </template>
 
 <script>
+import firebase from 'firebase'
 export default {
   layout: 'LaDos',
   data () {
@@ -107,6 +108,21 @@ export default {
       tokenRules: [
         v => !!v || 'Necesitas rellenar este cambio'
       ]
+    }
+  },
+  methods: {
+    signAdmin () {
+      try {
+        firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
+        const user = firebase.auth().currentUser
+        firebase.database().ref('users/' + user.uid.toString()).set({
+          name: this.name,
+          lastName: this.lastN,
+          email: this.email
+        })
+      } catch (error) {
+        console.log(`Esto es un error: ${error}`)
+      }
     }
   }
 }

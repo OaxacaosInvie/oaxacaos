@@ -16,28 +16,29 @@
                 <h1 class="display-1 font-weight-bold">Inicio de sesión</h1>
                 <p class="title font-weight-light">¡Hola! Es un gusto verte de vuelta.</p>
               </div>
-              <v-form
-              ref="form"
-              submit.prevent="login"
-              >
+              <v-form ref="form" v-model="valid">
                 <v-container>
                   <div class="px-6" align="center" justify="center">
                     <v-text-field
                       v-model="email"
+                      :rules="emailRules"
                       label="Correo electrónico"
+                      required
                       dark
                       type="email"
                       color="white"
                     ></v-text-field>
                     <v-text-field
                       v-model="password"
+                      :rules="passwordRules"
                       label="Contraseña"
                       type="password"
+                      required
                       dark
                       color="white"
                     ></v-text-field>
                     <div class="pt-6">
-                      <v-btn id="btn-login" color="white" elevation="0" rounded>Ingresar</v-btn>
+                      <v-btn id="btn-login" color="white" elevation="0" rounded v-on:click="login">Ingresar</v-btn>
                     </div>
                   </div>
                 </v-container>
@@ -63,20 +64,24 @@ export default {
     navLog
   },
   data: () => ({
+    valid: false,
     password: '',
-    email: ''
+    passwordRules: [
+      v => !!v || 'Necesitas escribir tu contraseña para entrar'
+    ],
+    email: '',
+    emailRules: [
+      v => !!v || 'Necesitas escribir tu correo para entrar',
+      v => /.+@.+/.test(v) || 'Dirección de correo inválida'
+    ]
   }),
-  asyncData () {
-    return {
-      authenticatedUser: null
-    }
-  },
-  created () {
-    firebase.auth().onAuthStateChanged(user => (this.authenticatedUser = user))
-  },
   methods: {
     login () {
-      firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+      try {
+        firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 }

@@ -15,9 +15,11 @@
 
         <v-spacer></v-spacer>
 
-        <v-btn text>
-          Ver mapa
-        </v-btn>
+        <nuxt-link to="/home" id="no-decoration">
+          <v-btn text>
+            Ver mapa
+          </v-btn>
+        </nuxt-link>
 
         <v-btn text>
           Agregar reporte

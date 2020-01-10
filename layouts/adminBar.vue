@@ -9,20 +9,18 @@
         elevate-on-scroll
       >
 
-        <nuxt-link to="/" id="no-decoration">
+        <nuxt-link to="/admin/home" id="no-decoration">
           <v-btn text><img src="../static/logoWhite.png" alt="ayuda" width="180"></v-btn>
         </nuxt-link>
 
         <v-spacer></v-spacer>
 
-        <nuxt-link to="/map" id="no-decoration">
-          <v-btn text>
-            Ver mapa
-          </v-btn>
-        </nuxt-link>
-
         <v-btn text>
           Agregar reporte
+        </v-btn>
+
+        <v-btn text>
+          Ver reportes
         </v-btn>
 
         <v-menu
@@ -55,7 +53,7 @@
         elevate-on-scroll
       >
 
-        <nuxt-link to="/" id="no-decoration">
+        <nuxt-link to="/admin/home" id="no-decoration">
           <v-btn text><img src="../static/logoWhite.png" alt="ayuda" width="180"></v-btn>
         </nuxt-link>
 
@@ -72,7 +70,7 @@
 
 <script>
 export default {
-
+  name: 'adminBar'
 }
 </script>
 

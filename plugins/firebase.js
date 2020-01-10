@@ -1,4 +1,5 @@
 import firebase from 'firebase'
+import 'firebase/auth'
 
 let app = null
 
@@ -17,3 +18,5 @@ app = firebase.apps.length
   : firebase.initializeApp(firebaseConfig)
 
 export const db = app.database()
+
+export const auth = firebase.auth()

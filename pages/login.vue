@@ -20,7 +20,7 @@
                 <v-container>
                   <div class="px-6" align="center" justify="center">
                     <v-text-field
-                      v-model="email"
+                      v-model="account.email"
                       :rules="emailRules"
                       label="Correo electrónico"
                       required
@@ -29,7 +29,7 @@
                       color="white"
                     ></v-text-field>
                     <v-text-field
-                      v-model="password"
+                      v-model="account.password"
                       :rules="passwordRules"
                       label="Contraseña"
                       type="password"
@@ -46,6 +46,9 @@
               <div style="color: white" class="py-6">
                 <p class="font-weight-light">¿Aún no tienes cuenta? <nuxt-link to="/select" id="no-decoration" style="color:white" class="font-weight-bold">Regístrate aquí</nuxt-link></p>
               </div>
+              <div v-if="isError" style="color: white" class="py-6">
+                <p class="font-weight-light">{{ errorMsg }}</p>
+              </div>
             </div>
           </v-col>
         </v-row>
@@ -55,7 +58,9 @@
 </template>
 
 <script>
-import firebase from 'firebase'
+/* eslint-disable */
+// import firebase from 'firebase'
+import { setTimeout } from 'timers'
 import navLog from '../components/navLog'
 
 export default {
@@ -64,24 +69,36 @@ export default {
     navLog
   },
   data: () => ({
+    account: {
+      password: '',
+      email: ''
+    },
     valid: false,
-    password: '',
     passwordRules: [
       v => !!v || 'Necesitas escribir tu contraseña para entrar'
     ],
-    email: '',
     emailRules: [
       v => !!v || 'Necesitas escribir tu correo para entrar',
       v => /.+@.+/.test(v) || 'Dirección de correo inválida'
-    ]
+    ],
+    isError: false,
+    errorMsg: ''
   }),
   methods: {
     login () {
-      try {
-        firebase.auth().signInWithEmailAndPassword(this.email, this.password)
-      } catch (error) {
-        console.log(error)
-      }
+      this.$store.dispatch('users/login', this.account).catch(error => {
+        this.isError = true
+        this.errorMsg = error.code
+        setTimeout(() => {
+          this.isError = false
+        }, 10000)
+      })
+      this.$router.push('/admin/home')
+      // try {
+      //   firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+      // } catch (error) {
+      //   console.log(error)
+      // }
     }
   }
 }

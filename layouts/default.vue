@@ -50,7 +50,6 @@
         color="#F95738"
         dark
         class="hidden-md-and-up"
-        dense
         fixed
         elevate-on-scroll
       >
@@ -61,7 +60,31 @@
 
         <v-spacer></v-spacer>
 
-        <v-app-bar-nav-icon></v-app-bar-nav-icon>
+        <v-menu
+          left
+          bottom
+        >
+          <template v-slot:activator="{ on }">
+            <v-btn icon v-on="on">
+              <v-app-bar-nav-icon></v-app-bar-nav-icon>
+            </v-btn>
+          </template>
+
+          <v-list>
+            <nuxt-link to="/map" id="no-decoration">
+              <v-list-item
+                @click="() => {}"
+              >
+                <v-list-item-title>Ver mapa</v-list-item-title>
+              </v-list-item>
+            </nuxt-link>
+            <v-list-item
+              @click="() => {}"
+            >
+              <v-list-item-title>Agregar reporte</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
       </v-app-bar>
     </div>
     <v-content>

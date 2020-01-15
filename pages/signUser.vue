@@ -53,6 +53,13 @@
                       @click:append="show1 = !show1"
                       color="#F95738"
                     ></v-text-field>
+                    <v-text-field
+                      label="Número de telefono"
+                      color="#F95738"
+                      type="tel"
+                      pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                      aria-required
+                    ></v-text-field>
                     <div class="py-6">
                       <v-btn dark color="#F95738" elevation="0" rounded v-on:click="sign">Ingresar</v-btn>
                     </div>

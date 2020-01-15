@@ -1,18 +1,35 @@
 <template>
   <div class="py-12">
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.6.0/mapbox-gl.css' rel='stylesheet' />
     <div class="py-12">
       <v-container>
-        <v-row align="center" justify="center">
+        <v-row align="start" justify="center">
           <v-col
           cols="12"
           xl="8"
-          lg="7"
+          lg="8"
           md="7"
           sm="10"
           xs="12"
           >
-            <div id="map"></div>
+            <div>
+              <mapComp />
+            </div>
+          </v-col>
+          <v-col
+          cols="12"
+          xl="4"
+          lg="4"
+          md="5"
+          sm="10"
+          xs="12"
+          >
+            <div>
+              <v-card>
+                <div class="pa-12">
+                  <h1>hola</h1>
+                </div>
+              </v-card>
+            </div>
           </v-col>
         </v-row>
       </v-container>
@@ -22,6 +39,7 @@
 
 <script>
 /* eslint-disable */
+import mapComp from '../components/mapComp'
 // import mapboxgl from 'mapbox-gl-vue'
 // mapboxgl.accessToken = 'pk.eyJ1IjoieGltZW5hYmMiLCJhIjoiY2s0M28xYncxMDJ5czNrbndhOTc3MGR3ZSJ9.jbTEn67uRUc22k3emC8LSw'
 // const map = new mapboxgl.Map({
@@ -31,6 +49,9 @@
 //   zoom: 15
 // })
 export default {
-  layout: 'default'
+  layout: 'default',
+  components: {
+    mapComp
+  }
 }
 </script>

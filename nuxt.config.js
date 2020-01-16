@@ -93,9 +93,8 @@ module.exports = {
     //   })
     // }
   },
-
-  server: {
-    port: 1234,
-    host: '10.0.0.24' //25.1.55.134 -  | 10.0.0.24 - Inviertete
-  }
+  // server: {
+  //   port: 1234,
+  //   host: '10.0.0.24' //25.1.55.134 -  | 10.0.0.24 - Inviertete
+  // }
 }

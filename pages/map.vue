@@ -26,7 +26,7 @@
             <div>
               <v-card>
                 <div class="pa-12">
-                  <h1>hola</h1>
+                  <h1>adios</h1>
                 </div>
               </v-card>
             </div>

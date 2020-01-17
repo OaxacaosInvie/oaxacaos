@@ -81,6 +81,12 @@ module.exports = {
     }
   },
   /*
+  ** Env
+  */
+  env: {
+    mapToken = process.env.MAPTOKEN || 'sk.eyJ1IjoieGltZW5hYmMiLCJhIjoiY2s1OG80NXc2MGdnMTNucWhrZnhjd2xiaCJ9.JPCIElQqY-fAWLyG8nEplg'
+  },
+  /*
   ** Build configuration
   */
   build: {

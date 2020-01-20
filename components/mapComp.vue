@@ -63,20 +63,18 @@ export default {
         placeholder: 'Buscar'
       })
 
+      let mapNavCont = new mapboxgl.NavigationControl()
+      
+      let maoGeoCont = new mapboxgl.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true
+        },
+        trackUserLocation: true
+      })
+
       map.addControl(mapgeocoder, 'top-left')
-
-      // Navigation control
-      map.addControl(new mapboxgl.NavigationControl())
-
-      // Geolocate control
-      map.addControl(
-        new mapboxgl.GeolocateControl({
-          positionOptions: {
-            enableHighAccuracy: true
-          },
-          trackUserLocation: true
-        })
-      )
+      map.addControl(maoGeoCont, 'bottom-right')
+      map.addControl(mapNavCont, 'bottom-left')
       // ----------------------------------
 
       // Get lng and lat by clicks

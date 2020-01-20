@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app id="ap">
      <div>
       <v-app-bar
         color="#F95738"
@@ -103,5 +103,7 @@ export default {
   v-app {
     padding-right: 0 !important;
   }
-
+  #ap {
+    background: white;
+  }
 </style>

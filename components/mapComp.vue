@@ -1,5 +1,14 @@
 <template>
   <div>
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css"
+      type="text/css"
+    />
+    <!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
     <div id="map" class="map">
     </div>
   </div>
@@ -25,7 +34,7 @@ export default {
     createMap () {
       const mapboxgl = require('mapbox-gl')
       const MapboxGeocoder = require('@mapbox/mapbox-gl-geocoder')
-      
+
       mapboxgl.accessToken = 'pk.eyJ1IjoicGlucGFydGRldiIsImEiOiJjajBqOXh0anAwMDFkMzNwbW5qMzVuZGo0In0.ltvQzboVtprxfeFAVOw1GA'
 
       // init the map
@@ -40,14 +49,26 @@ export default {
         attributionControl: false,
         showCompass: true
       })
-      
-      map.addControl(new mapboxgl.NavigationControl())
 
-      this.MapboxGeocoder = new MapboxGeocoder({
+      // this.MapboxGeocoder = new MapboxGeocoder({
+      //   accessToken: 'sk.eyJ1IjoieGltZW5hYmMiLCJhIjoiY2s1OG80NXc2MGdnMTNucWhrZnhjd2xiaCJ9.JPCIElQqY-fAWLyG8nEplg',
+      //   marker: true
+      // })
+
+      // Controls --------------------------
+
+      let mapgeocoder = new MapboxGeocoder({
         accessToken: 'sk.eyJ1IjoieGltZW5hYmMiLCJhIjoiY2s1OG80NXc2MGdnMTNucWhrZnhjd2xiaCJ9.JPCIElQqY-fAWLyG8nEplg',
-        marker: true
+        mapboxgl: mapboxgl,
+        placeholder: 'Buscar'
       })
 
+      map.addControl(mapgeocoder, 'top-left')
+
+      // Navigation control
+      map.addControl(new mapboxgl.NavigationControl())
+
+      // Geolocate control
       map.addControl(
         new mapboxgl.GeolocateControl({
           positionOptions: {
@@ -56,6 +77,16 @@ export default {
           trackUserLocation: true
         })
       )
+      // ----------------------------------
+
+      // Get lng and lat by clicks
+      map.on('click', function (e) {
+        const lngandLat = e.lngLat
+        const lng = Object.values(lngandLat)[0]
+        const lat = Object.values(lngandLat)[1]
+        console.log(`lng: ${lng}, lat: ${lat}`)
+      })
+
       // mapboxgl.addLayer({
       //   id: 'points'
       //   type: 'circle'

@@ -38,7 +38,7 @@ export default {
       mapboxgl.accessToken = 'pk.eyJ1IjoicGlucGFydGRldiIsImEiOiJjajBqOXh0anAwMDFkMzNwbW5qMzVuZGo0In0.ltvQzboVtprxfeFAVOw1GA'
 
       // init the map
-      var map = new mapboxgl.Map({
+      let map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/ximenabc/ck44uqzs21gk71cmtma66htry',
         center: [-96.707810, 17.067600], // starting position [lng(-180, 180), lat(-90, 90)]
@@ -50,6 +50,43 @@ export default {
         showCompass: true
       })
 
+      let customData = {
+        'features': [
+          {
+            'type': 'Feature',
+            'properties': {
+              'title': 'Inviértete',
+              'description': 'Centro de educación alternativa',
+              'address': 'Perú 218, America Sur, 68104 Oaxaca de Juárez, Oax.'
+            },
+            'geometry': {
+              'coordinates': [-96.707810, 17.067600],
+              'type': 'Point'
+            }
+          }
+        ],
+        'type': 'FeatureCollection'
+      }
+
+      function forwardGeocoder(query) {
+        let matchingFeatures = []
+        for (var i = 0; i < customData.features.length; i++) {
+          let feature = customData.features[i]
+          console.log(feature)
+          if (
+            feature.properties.title
+            .toLowerCase()
+            .search(query.toLowerCase()) !== -1
+          ) {
+            feature['place_name'] = feature.properties.title
+            feature['center'] = feature.geometry.coordinates
+            feature['place_type'] = ['place']
+            matchingFeatures.push(feature)
+          }
+        }
+        return matchingFeatures
+      }
+
       // this.MapboxGeocoder = new MapboxGeocoder({
       //   accessToken: 'sk.eyJ1IjoieGltZW5hYmMiLCJhIjoiY2s1OG80NXc2MGdnMTNucWhrZnhjd2xiaCJ9.JPCIElQqY-fAWLyG8nEplg',
       //   marker: true
@@ -60,7 +97,31 @@ export default {
       let mapgeocoder = new MapboxGeocoder({
         accessToken: 'sk.eyJ1IjoieGltZW5hYmMiLCJhIjoiY2s1OG80NXc2MGdnMTNucWhrZnhjd2xiaCJ9.JPCIElQqY-fAWLyG8nEplg',
         mapboxgl: mapboxgl,
-        placeholder: 'Buscar'
+        placeholder: 'Buscar',
+        countries: 'mx',
+        localGeocoder: forwardGeocoder,
+        language: 'es',
+        flyTo: {
+          bearing: 0,
+          speed: 1.75,
+          curve: 1,
+          easing: function(t) {
+            return t
+          }
+        },
+        // bbox: [-98.706053, 15.705243, -93.662332, 18.580203],
+        // filter: function(item) {
+        //   return item.context
+        //     .map(function(i) {
+        //       return (
+        //         i.id.split('.').shift() === 'region' &&
+        //         i.text === 'Oaxaca'
+        //       )
+        //     })
+        //     .reduce(function(aac, cur) {
+        //       return acc || cur
+        //     })
+        // }
       })
 
       let mapNavCont = new mapboxgl.NavigationControl()
@@ -83,6 +144,9 @@ export default {
         const lng = Object.values(lngandLat)[0]
         const lat = Object.values(lngandLat)[1]
         console.log(`lng: ${lng}, lat: ${lat}`)
+        var marker = new mapboxgl.Marker()
+          .setLngLat([lng, lat])
+          .addTo(map);
       })
 
       // mapboxgl.addLayer({

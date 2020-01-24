@@ -1,6 +1,6 @@
 <template>
   <div class="py-12">
-    <div class="py-12">
+    <div class="py-6">
       <v-container>
         <v-row align="start" justify="center">
           <v-col
@@ -26,7 +26,7 @@
             <div>
               <v-card>
                 <div class="pa-12">
-                  <h1>adios</h1>
+                  <h1>hola</h1>
                 </div>
               </v-card>
             </div>

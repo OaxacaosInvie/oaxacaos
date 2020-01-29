@@ -1,12 +1,15 @@
 import Cookie from 'js-cookie'
-import { auth } from '~/plugins/firebase'
-
+const firebase = require('firebase')
 /* eslint-disable */
 const state = () => ({
-  user: null
+  user: null,
+  loadingState: 'notLoading'
 })
 
 export const mutations = {
+  SET_LOADING_STATE: (state, status) => {
+    state.loadingState = status
+  },
   SET_USERS: (state, account) => {
     state.user = account
   }
@@ -14,14 +17,16 @@ export const mutations = {
 
 export const actions = {
   async login ({ commit }, account) {
+    commit('SET_LOADING_STATE', 'loading')
     try {
       // Login the user
-      await auth.signInWithEmailAndPassword(account.email, account.password)
-
+      await firebase.auth().signInWithEmailAndPassword(account.email, account.password)
+      console.log('Is it me jesus')
       // Get JWT from firebase
-      const token = await auth.currentUser.getIdToken()
-      const { email, uid } = auth.currentUser()
-
+      const token = await firebase.auth().currentUser.getIdToken()
+      const user = firebase.auth().currentUser
+      const email = user.email
+      const uid = user.uid
       // Set JWT to the cookie
       Cookie.set('access_token', token)
 
@@ -30,8 +35,10 @@ export const actions = {
         email,
         uid
       })
+      commit('SET_LOADING_STATE', 'notLoading')
     } catch (error) {
-      throw error
+      commit('SET_LOADING_STATE', 'somethig was wrong')
+      console.log(error)
     }
   }
 }

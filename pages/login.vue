@@ -87,12 +87,14 @@ export default {
   methods: {
     login () {
       this.$store.dispatch('users/login', this.account).catch(error => {
+        console.log(error)
         this.isError = true
         this.errorMsg = error.code
         setTimeout(() => {
           this.isError = false
         }, 10000)
       })
+      console.log('You get logged')
       this.$router.push('/admin/home')
       // try {
       //   firebase.auth().signInWithEmailAndPassword(this.email, this.password)

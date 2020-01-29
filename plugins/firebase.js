@@ -17,6 +17,11 @@ app = firebase.apps.length
   ? firebase.app()
   : firebase.initializeApp(firebaseConfig)
 
-export const db = app.database()
+const db = app.database()
 
-export const auth = firebase.auth()
+const auth = firebase.auth()
+
+export default {
+  db,
+  auth
+}
